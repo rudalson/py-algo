@@ -5,7 +5,7 @@ list_hobby = []
 
 class Solution:
     def __init__(self):
-        self.max_matched = 0
+        self.max_matched = 5
         self.couple_set = set()
 
     def get_max_matched(self):
@@ -28,14 +28,18 @@ hypo_matched = 0
 solution = Solution()
 
 
+def find_one_loop(loop):
+    for i in range(len(loop) - 1):
+        basis = loop[i]
+        matched_count = basis & loop[i + 1]
+        print("{} : ({}, {}) - {}. count({})".format(i, basis, loop[i + 1], matched_count,
+                                                     count_set_bits(matched_count)))
+
+
 def find_best_couple(hobbys):
     matched_count = 0
     for i in range(len(hobbys) - 1):
-        basis = hobbys[i]
-        matched_count = basis & hobbys[i + 1]
-        print("{} : ({}, {}) - {}. count({})".format(i, basis, hobbys[i + 1], matched_count,
-                                                     count_set_bits(matched_count)))
-
+        find_one_loop(hobbys[i:])
     # print("list2 :", list_member)
 
 
@@ -47,17 +51,12 @@ def count_set_bits(n):
     return count
 
 
-
 def convert_numeric(characters):
     value = 0
     for c in characters:
         value |= 1 << ord(c) - ord('A')
 
     list_hobby.append(value)
-
-    count = count_set_bits(previous_value & value)
-    previous_value = value
-    t = (hypo_matched if hypo_matched > count else count)
 
     # if dic.get(value) is None:
     #     dic[value] = [len(list_hobby)]
