@@ -11,8 +11,7 @@ def method1(hobbys):
     for i in range(len(hobbys) - 1):
         basis = hobbys[i]
         matched_count = basis & hobbys[i + 1]
-        print("{} : ({}, {}) - {}. count({})".format(i, basis, hobbys[i + 1], matched_count,
-                                                     count_set_bits(matched_count)))
+        print("{} : ({}, {}) - {}. count({})".format(i, basis, hobbys[i + 1], matched_count, count_set_bits(matched_count)))
 
     # print("list2 :", list_member)
 
